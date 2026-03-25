@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: ai-demo
+    description: This service demonstration the spring AI capabilities with ollama
+    version: 1.0.0
+info:
+  application:
+    name: ${spring.application.name}
+    description: ${spring.application.description}
+    version: ${spring.application.version}
+
+server:
+  port: 8080
+
+management:
+  info:
+    java:
+      enabled: true
+    enabled: true
+  health:
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+
+---
+spring:
+  ai:
+    ollama:
+      baseUrl: http://localhost:11434
+      chat:
+        options:
+          model:  qwen3.5:2b
+---
+#logging:
+#  level:
+#    org.springframework.ai: DEBUG

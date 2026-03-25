@@ -1,6 +1,8 @@
 package org.pk.ai.chat;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.ChatClientResponse;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +35,15 @@ public class ChatController {
                 .user(prompt)
                 .stream()
                 .content();
+    }
+
+    @GetMapping("/stream/response")
+    public ChatResponse streamChatResponse(@RequestParam("How Java is secure than other programming languages?") String prompt) {
+        return this.chatClient
+                .prompt()
+                .user(prompt)
+                .call()
+                .chatResponse();
     }
 
 
